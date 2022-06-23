@@ -8,3 +8,6 @@ to run this app:
 - connect your emulator / device, please enable Developer Mode (android)
 - run react server with "npm start" or "yarn start"
 - run app with "yarn android" "npx react-native run-android"
+
+screenshot: <br />
+![alt text](https://github.com/twinedo/ResonanceAudioDummyApp/blob/main/screenshot.png)
