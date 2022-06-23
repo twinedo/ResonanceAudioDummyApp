@@ -34,7 +34,7 @@ const App = () => {
         <View style={styles.displayFlex}>
           <TextInput
             style={styles.txtInput}
-            placeholder="Change Sound File"
+            placeholder="/file/bird-audio.wav"
             placeholderTextColor="grey"
           />
         </View>
