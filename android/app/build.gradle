@@ -167,7 +167,12 @@ android {
             }
         }
     }
-
+    buildTypes {
+        release {
+            minifyEnabled true
+            proguardFiles.add(file('../../proguard-gvr.txt'))
+        }
+    }
     if (isNewArchitectureEnabled()) {
         // We configure the NDK build only if you decide to opt-in for the New Architecture.
         externalNativeBuild {
@@ -262,7 +267,10 @@ dependencies {
     implementation "com.facebook.react:react-native:+"  // From node_modules
 
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.0.0"
-
+    implementation 'com.google.vr:sdk-base:1.160.0'
+    implementation 'com.google.vr:sdk-panowidget:1.170.0'
+    implementation project(':audio')
+    
     debugImplementation("com.facebook.flipper:flipper:${FLIPPER_VERSION}") {
         exclude group:'com.facebook.fbjni'
     }
@@ -284,6 +292,8 @@ dependencies {
     } else {
         implementation jscFlavor
     }
+
+
 }
 
 if (isNewArchitectureEnabled()) {

@@ -1,23 +1,49 @@
-import {Alert, Button, StyleSheet, Text, TextInput, View} from 'react-native';
-import React from 'react';
+import {
+  Button,
+  StyleSheet,
+  Text,
+  TextInput,
+  View,
+  NativeModules,
+} from 'react-native';
+import React, {useState} from 'react';
+import FilePickerManager from 'react-native-file-picker';
+
+const {BridgeModule} = NativeModules;
 
 const Spacer = props => {
   const {width, height} = props;
-
   return <View style={{width, height}} />;
 };
 
 const App = () => {
+  const [singleFile, setSingleFile] = useState('');
+
   const _onPlay = () => {
-    Alert.alert('Play Button Pressed');
+    BridgeModule.playAudio('Play Button Pressed');
   };
 
   const _onStop = () => {
-    Alert.alert('Stop Button Pressed');
+    BridgeModule.stopAudio('Stop Button Pressed');
   };
 
-  const _onChangeSoundFile = () => {
-    Alert.alert('Change Audio File Button Pressed');
+  const _onChangeSoundFile = async () => {
+    try {
+      FilePickerManager.showFilePicker(null, response => {
+        if (response.didCancel) {
+          console.log('User cancelled file picker');
+        } else if (response.error) {
+          console.log('FilePickerManager Error: ', response.error);
+        } else {
+          const path = response.path;
+          console.log({response});
+          setSingleFile(path);
+          BridgeModule.setFilePath(path);
+        }
+      });
+    } catch (err) {
+      console.log('Unknown Error: ' + JSON.stringify(err));
+    }
   };
 
   return (
@@ -36,6 +62,7 @@ const App = () => {
             style={styles.txtInput}
             placeholder="/file/bird-audio.wav"
             placeholderTextColor="grey"
+            value={singleFile}
           />
         </View>
         <Spacer width={10} />
@@ -91,29 +118,35 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
+
   horizontalPaddingDefaults: {
     paddingHorizontal: 16,
   },
+
   verticalPaddingDefaults: {
     padingVertical: 16,
   },
+
   textCenter: {
     color: 'black',
     textAlign: 'center',
     fontSize: 16,
   },
+
   displayFlex: {
     flex: 1,
   },
+
   txtInput: {
     borderBottomWidth: 1,
     borderBottomColor: 'black',
     textAlign: 'center',
-    // flex: 1,
   },
+
   row: {
     flexDirection: 'row',
   },
+
   btn: {
     borderRadius: 5,
   },
