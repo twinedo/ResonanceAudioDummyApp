@@ -20,11 +20,11 @@ const App = () => {
   const [singleFile, setSingleFile] = useState('');
 
   const _onPlay = () => {
-    BridgeModule.playAudio('Play Button Pressed');
+    BridgeModule.playAudio();
   };
 
   const _onStop = () => {
-    BridgeModule.stopAudio('Stop Button Pressed');
+    BridgeModule.stopAudio();
   };
 
   const _onChangeSoundFile = async () => {
