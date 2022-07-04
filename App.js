@@ -8,6 +8,12 @@ import {
 } from 'react-native';
 import React, {useEffect, useState} from 'react';
 import FilePickerManager from 'react-native-file-picker';
+import DocumentPicker, {
+  DirectoryPickerResponse,
+  DocumentPickerResponse,
+  isInProgress,
+  types,
+} from 'react-native-document-picker';
 
 const {BridgeModule} = NativeModules;
 
@@ -27,29 +33,39 @@ const App = () => {
 
   const _onPlay = () => {
     if (singleFile !== '') {
-      BridgeModule.playAudio();
+      BridgeModule.playAudio(singleFile);
     }
   };
 
   const _onStop = () => {
-    BridgeModule.stopAudio();
+    if (singleFile !== '') {
+      BridgeModule.stopAudio();
+    }
     // onChangePosition();
   };
 
   const _onChangeSoundFile = async () => {
     try {
-      FilePickerManager.showFilePicker(null, response => {
-        if (response.didCancel) {
-          console.log('User cancelled file picker');
-        } else if (response.error) {
-          console.log('FilePickerManager Error: ', response.error);
-        } else {
-          const path = response.path;
-          console.log({response});
-          setSingleFile(path);
-          BridgeModule.setFilePath(path);
-        }
+      const pickerResult = await DocumentPicker.pickSingle({
+        presentationStyle: 'fullScreen',
+        copyTo: 'documentDirectory',
+        type: '*/*',
       });
+      console.log('pickerResult', pickerResult);
+      setSingleFile(pickerResult.name);
+      BridgeModule.setFilePath(pickerResult.name);
+      // FilePickerManager.showFilePicker(null, response => {
+      //   if (response.didCancel) {
+      //     console.log('User cancelled file picker');
+      //   } else if (response.error) {
+      //     console.log('FilePickerManager Error: ', response.error);
+      //   } else {
+      //     const path = response.path;
+      //     console.log('path', path);
+      //     setSingleFile(path);
+      //     BridgeModule.setFilePath(path);
+      //   }
+      // });
     } catch (err) {
       console.log('Unknown Error: ' + JSON.stringify(err));
     }
@@ -248,6 +264,7 @@ export default App;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: 'white',
   },
 
   horizontalPaddingDefaults: {
@@ -272,6 +289,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: 'black',
     textAlign: 'center',
+    color: 'black',
   },
 
   row: {
