@@ -1,15 +1,15 @@
-import React, {useState} from 'react';
 import {
   Button,
-  NativeModules,
-  Platform,
   StyleSheet,
   Text,
   TextInput,
   View,
+  NativeModules,
+  Platform,
 } from 'react-native';
-import DocumentPicker, {types} from 'react-native-document-picker';
+import React, {useEffect, useState} from 'react';
 import FilePickerManager from 'react-native-file-picker';
+import DocumentPicker, {types} from 'react-native-document-picker';
 
 const {BridgeModule} = NativeModules;
 

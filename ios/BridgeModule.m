@@ -33,7 +33,8 @@ RCT_EXPORT_METHOD(playAudio)
   [_gvr_audio_engine playSound:_sound_object_id loopingEnabled:true];
 
 }
-RCT_EXPORT_METHOD(stopAudio )
+
+RCT_EXPORT_METHOD(stopAudio:(NSString *)filePath)
 {
   [_gvr_audio_engine stopSound:_sound_object_id];
   [_gvr_audio_engine stop];
@@ -53,6 +54,7 @@ RCT_EXPORT_METHOD(stopAudio )
   
   [_gvr_audio_engine playSound:_sound_object_id loopingEnabled:true];
 }
+
 RCT_EXPORT_METHOD(changePosition:(float *)x y:(float *)y z:(float *)z )
 {
   _cube_position[0] = *x;
