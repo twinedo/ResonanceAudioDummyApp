@@ -39,6 +39,9 @@ public class BridgeModule extends ReactContextBaseJavaModule {
     @ReactMethod
     public void stopAudio() {
         gvrAudioEngine.stopSound(sourceId);
+           gvrAudioEngine = new GvrAudioEngine(getReactApplicationContext(), GvrAudioEngine.RenderingMode.BINAURAL_HIGH_QUALITY);
+        gvrAudioEngine.preloadSoundFile(OBJECT_SOUND_FILE);
+        sourceId = gvrAudioEngine.createSoundObject(OBJECT_SOUND_FILE);
     }
 
     @ReactMethod

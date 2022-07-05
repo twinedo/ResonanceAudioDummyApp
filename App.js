@@ -1,12 +1,14 @@
+import React, {useState} from 'react';
 import {
   Button,
+  NativeModules,
+  Platform,
   StyleSheet,
   Text,
   TextInput,
   View,
-  NativeModules,
 } from 'react-native';
-import React, {useEffect, useState} from 'react';
+import DocumentPicker, {types} from 'react-native-document-picker';
 import FilePickerManager from 'react-native-file-picker';
 
 const {BridgeModule} = NativeModules;
@@ -37,21 +39,43 @@ const App = () => {
   };
 
   const _onChangeSoundFile = async () => {
-    try {
-      FilePickerManager.showFilePicker(null, response => {
-        if (response.didCancel) {
-          console.log('User cancelled file picker');
-        } else if (response.error) {
-          console.log('FilePickerManager Error: ', response.error);
-        } else {
-          const path = response.path;
-          console.log({response});
-          setSingleFile(path);
-          BridgeModule.setFilePath(path);
-        }
-      });
-    } catch (err) {
-      console.log('Unknown Error: ' + JSON.stringify(err));
+    if (Platform.OS === 'ios') {
+      try {
+        const response = await DocumentPicker.pick({
+          type: types.audio,
+          presentationStyle: 'fullScreen',
+          copyTo: 'documentDirectory',
+        });
+        let uriStrings = [];
+        uriStrings.push(response[0].fileCopyUri);
+        DocumentPicker.releaseSecureAccess(uriStrings)
+          .then(res => {
+            console.warn('releaseSecureAccess: success');
+            console.log(response);
+            setSingleFile(response[0].fileCopyUri);
+            BridgeModule.setFilePath(response[0].fileCopyUri);
+          })
+          .catch(err => {});
+      } catch (err) {
+        console.warn(err);
+      }
+    } else {
+      try {
+        FilePickerManager.showFilePicker(null, response => {
+          if (response.didCancel) {
+            console.log('User cancelled file picker');
+          } else if (response.error) {
+            console.log('FilePickerManager Error: ', response.error);
+          } else {
+            const path = response.path;
+            console.log({response});
+            setSingleFile(path);
+            BridgeModule.setFilePath(path);
+          }
+        });
+      } catch (err) {
+        console.log('Unknown Error: ' + JSON.stringify(err));
+      }
     }
   };
 
