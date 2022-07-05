@@ -34,7 +34,7 @@ RCT_EXPORT_METHOD(playAudio)
 
 }
 
-RCT_EXPORT_METHOD(stopAudio:(NSString *)filePath)
+RCT_EXPORT_METHOD(stopAudio)
 {
   [_gvr_audio_engine stopSound:_sound_object_id];
   [_gvr_audio_engine stop];
