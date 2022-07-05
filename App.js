@@ -5,6 +5,7 @@ import {
   TextInput,
   View,
   NativeModules,
+  Platform,
 } from 'react-native';
 import React, {useEffect, useState} from 'react';
 import FilePickerManager from 'react-native-file-picker';
@@ -12,8 +13,17 @@ import DocumentPicker, {
   DirectoryPickerResponse,
   DocumentPickerResponse,
   isInProgress,
+  pick,
   types,
 } from 'react-native-document-picker';
+import {
+  request,
+  PERMISSIONS,
+  check,
+  checkMultiple,
+} from 'react-native-permissions';
+import RNFetchBlob from 'rn-fetch-blob';
+import RNFS from 'react-native-fs';
 
 const {BridgeModule} = NativeModules;
 
@@ -45,27 +55,50 @@ const App = () => {
   };
 
   const _onChangeSoundFile = async () => {
+    // console.log('pick')
     try {
       const pickerResult = await DocumentPicker.pickSingle({
         presentationStyle: 'fullScreen',
         copyTo: 'documentDirectory',
-        type: '*/*',
+        type: [types.audio],
       });
-      console.log('pickerResult', pickerResult);
-      setSingleFile(pickerResult.name);
-      BridgeModule.setFilePath(pickerResult.name);
-      // FilePickerManager.showFilePicker(null, response => {
-      //   if (response.didCancel) {
-      //     console.log('User cancelled file picker');
-      //   } else if (response.error) {
-      //     console.log('FilePickerManager Error: ', response.error);
-      //   } else {
-      //     const path = response.path;
-      //     console.log('path', path);
-      //     setSingleFile(path);
-      //     BridgeModule.setFilePath(path);
-      //   }
+      console.log('pickerResult', pickerResult.uri);
+
+      // console.log('uriios', uriIos);
+      // setSingleFile(pickerResult.fileCopyUri);
+      const uri =
+        Platform.OS === 'ios'
+          ? pickerResult.uri.replace('file://', '')
+          : pickerResult.uri;
+      // setSingleFile(uri);
+      // console.log('uriios', uri);
+      // RNFetchBlob.fs.stat(uri).then(res => {
+      //   console.log('fetchblob', res.path);
+      //   setSingleFile(res.path);
+      //   BridgeModule.setFilePath(res.path);
       // });
+      if (Platform.OS === 'android') {
+        RNFetchBlob.fs.stat(uri).then(res => {
+          console.log('fetchblob', res.path);
+          setSingleFile(res.path);
+          BridgeModule.setFilePath(res.path);
+        });
+      }
+
+      if (Platform.OS === 'ios') {
+        const uriIos = pickerResult.uri.replace('file://', '');
+        // console.log('uriios', uriIos)
+        RNFetchBlob.fs
+          .stat(uriIos)
+          .then(res => {
+            console.log('res ios', res);
+            setSingleFile(res.path);
+            BridgeModule.setFilePath(res.path);
+          })
+          .catch(err => {
+            console.log('err', err);
+          });
+      }
     } catch (err) {
       console.log('Unknown Error: ' + JSON.stringify(err));
     }
