@@ -50,7 +50,7 @@ const App = () => {
         uriStrings.push(response[0].fileCopyUri);
         DocumentPicker.releaseSecureAccess(uriStrings)
           .then(res => {
-            console.warn('releaseSecureAccess: success');
+            // console.warn('releaseSecureAccess: success');
             console.log(response);
             setSingleFile(response[0].fileCopyUri);
             BridgeModule.setFilePath(response[0].fileCopyUri);
@@ -128,7 +128,7 @@ const App = () => {
       if (params === 'x') {
         setPosition({...position, x: value[1]});
         console.log('ini 0 + x');
-        console.log('parsedawdawd', parseInt(value[1]));
+        // console.log('parsedawdawd', parseInt(value[1]));
         // BridgeModule.changePosition(
         //   parseFloat(position.x),
         //   parseFloat(position.y),

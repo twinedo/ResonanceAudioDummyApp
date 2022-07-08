@@ -9,7 +9,7 @@
 #import <React/RCTLog.h>
 #import <GVRKit/GVRKit.h>
 #import "GVRAudioEngine.h"
-#import <RNDocumentPicker.h>>
+#import <RNDocumentPicker.h>
 
 @interface BridgeModule ()<GVRRendererViewControllerDelegate> {
 }

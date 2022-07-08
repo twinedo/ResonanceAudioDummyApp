@@ -85,11 +85,11 @@ PODS:
     - GTMSessionFetcher/Core (~> 1.1)
   - libevent (2.1.12)
   - OpenSSL-Universal (1.1.1100)
-  - Permission-MediaLibrary (3.4.0):
+  - Permission-MediaLibrary (3.3.1):
     - RNPermissions
-  - Permission-PhotoLibrary (3.4.0):
+  - Permission-PhotoLibrary (3.3.1):
     - RNPermissions
-  - Permission-PhotoLibraryAddOnly (3.4.0):
+  - Permission-PhotoLibraryAddOnly (3.3.1):
     - RNPermissions
   - RCT-Folly (2021.06.28.00-v2):
     - boost
@@ -372,7 +372,7 @@ PODS:
     - React-Core
   - RNFS (2.20.0):
     - React-Core
-  - RNPermissions (3.4.0):
+  - RNPermissions (3.3.1):
     - React-Core
   - SocketRocket (0.6.0)
   - Yoga (1.14.0)
@@ -574,9 +574,9 @@ SPEC CHECKSUMS:
   GVRSDK: 319c8dc99759d029a44a7826327423d8ffe81b9c
   libevent: 4049cae6c81cdb3654a443be001fb9bdceff7913
   OpenSSL-Universal: ebc357f1e6bc71fa463ccb2fe676756aff50e88c
-  Permission-MediaLibrary: 4fd3aedd310d6a91b05d41ba082470434ae95706
-  Permission-PhotoLibrary: 71df5d922b3d9f1217bd2f992edceada0f439976
-  Permission-PhotoLibraryAddOnly: 2b299e09f14efe2c7aea380e6c7d0d8046c58aa6
+  Permission-MediaLibrary: cbc1ee191cf0fe73282d2b3f197714941783d99d
+  Permission-PhotoLibrary: ddb5a158725b29cb12e9e477e8a5f5151c66cc3c
+  Permission-PhotoLibraryAddOnly: 104e42dbe894b0fccb370be26dd1b4a3c23578eb
   RCT-Folly: 4d8508a426467c48885f1151029bc15fa5d7b3b8
   RCTRequired: eff60a46da0f496a6c76c8f60108c20626860d27
   RCTTypeSafety: 8cc8a45d0e2f93f1b42b5b2bbf23c4143f19935a
@@ -606,7 +606,7 @@ SPEC CHECKSUMS:
   ReactCommon: 74a3b8ee497c6d50ce86ef57e15c4c5bf654b83d
   rn-fetch-blob: f065bb7ab7fb48dd002629f8bdcb0336602d3cba
   RNFS: 4ac0f0ea233904cb798630b3c077808c06931688
-  RNPermissions: eac721f71748c4472d6e876038270b75397d6ee7
+  RNPermissions: 34d678157c800b25b22a488e4d8babb57456e796
   SocketRocket: fccef3f9c5cedea1353a9ef6ada904fde10d6608
   Yoga: 4935173923cabaa830e195be3e8e4cac045a8f90
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
