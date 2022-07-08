@@ -6481,9 +6481,9 @@ react-native-codegen@^0.69.1:
     jscodeshift "^0.13.1"
     nullthrows "^1.1.1"
 
-"react-native-document-picker@git+https://github.com/twinedo/rn-document-picker.git":
+"react-native-document-picker@git+https://github.com/DigitSense-DS/react-native-document-picker.git":
   version "8.1.1"
-  resolved "git+https://github.com/twinedo/rn-document-picker.git#baf78e9db9f0974586ce8023b6a449401d2503b1"
+  resolved "git+https://github.com/DigitSense-DS/react-native-document-picker.git#9a376ef593b64793867142dbc27f179ac458eec3"
   dependencies:
     invariant "^2.2.4"
 
