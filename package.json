@@ -14,7 +14,7 @@
     "npm": "^8.13.1",
     "react": "18.0.0",
     "react-native": "0.69.0",
-    "react-native-document-picker": "^8.1.1",
+    "react-native-document-picker": "git+https://github.com/twinedo/rn-document-picker.git",
     "react-native-file-picker": "^0.0.21",
     "react-native-fs": "^2.20.0",
     "react-native-permissions": "^3.4.0",
