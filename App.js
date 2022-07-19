@@ -221,7 +221,7 @@ const App = () => {
       <Button title="Stop" onPress={_onStop} />
       <Spacer height={50} />
       <View>
-        <Text style={styles.textCenter} onPress={_onPressChangePos}>
+        <Text style={styles.textCenter} >
           Change Position {'\n'} (change value x, y, z and click here)
         </Text>
         <Spacer height={30} />
@@ -262,6 +262,7 @@ const App = () => {
             <Text style={styles.textCenter}>Z</Text>
           </View>
         </View>
+        <Button title='Change Position' onPress={_onPressChangePos} />
       </View>
     </View>
   );
