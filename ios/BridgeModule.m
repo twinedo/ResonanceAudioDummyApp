@@ -55,11 +55,11 @@ RCT_EXPORT_METHOD(stopAudio)
   [_gvr_audio_engine playSound:_sound_object_id loopingEnabled:true];
 }
 
-RCT_EXPORT_METHOD(changePosition:(float *)x y:(float *)y z:(float *)z )
+RCT_EXPORT_METHOD(changePosition:(float)x y:(float)y z:(float)z )
 {
-  _cube_position[0] = *x;
-  _cube_position[1] = *y;
-  _cube_position[2] = *z;
+  _cube_position[0] = x;
+  _cube_position[1] = y;
+  _cube_position[2] = z;
 
 
   
