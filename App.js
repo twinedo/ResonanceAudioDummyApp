@@ -10,6 +10,7 @@ import {
 import React, {useEffect, useState} from 'react';
 import FilePickerManager from 'react-native-file-picker';
 import DocumentPicker, {types} from 'react-native-document-picker';
+import RNFetchBlob from 'rn-fetch-blob';
 
 const {BridgeModule} = NativeModules;
 
@@ -49,11 +50,10 @@ const App = () => {
         let uriStrings = [];
         uriStrings.push(response[0].fileCopyUri);
         DocumentPicker.releaseSecureAccess(uriStrings)
-          .then(res => {
-            // console.warn('releaseSecureAccess: success');
-            console.log(response);
-            setSingleFile(response[0].fileCopyUri);
-            BridgeModule.setFilePath(response[0].fileCopyUri);
+        .then(res => {
+          // console.warn('releaseSecureAccess: success');
+          setSingleFile(response[0].fileCopyUri);
+          BridgeModule.setFilePath(response[0].fileCopyUri);
           })
           .catch(err => {});
       } catch (err) {
